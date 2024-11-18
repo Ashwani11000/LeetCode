@@ -1,8 +1,8 @@
 ---------------------------------------
 ---------- Problem Statement ----------
 ---------------------------------------
--- 1280. Students and Examinations
 
+-- 1280. Students and Examinations
 -- Table: Students
 
 -- +---------------+---------+
@@ -14,6 +14,7 @@
 -- student_id is the primary key (column with unique values) for this table.
 -- Each row of this table contains the ID and the name of one student in the school.
  
+
 -- Table: Subjects
 
 -- +--------------+---------+
@@ -24,6 +25,7 @@
 -- subject_name is the primary key (column with unique values) for this table.
 -- Each row of this table contains the name of one subject in the school.
  
+
 -- Table: Examinations
 
 -- +--------------+---------+
@@ -35,10 +37,15 @@
 -- There is no primary key (column with unique values) for this table. It may contain duplicates.
 -- Each student from the Students table takes every course from the Subjects table.
 -- Each row of this table indicates that a student with ID student_id attended the exam of subject_name.
+ 
 
 -- Write a solution to find the number of times each student attended each exam.
+
 -- Return the result table ordered by student_id and subject_name.
+
 -- The result format is in the following example.
+
+ 
 
 -- Example 1:
 
@@ -100,8 +107,6 @@
 -- Alex did not attend any exams.
 -- John attended the Math exam 1 time, the Physics exam 1 time, and the Programming exam 1 time.
 
-
-
 ------------------------------
 ---------- Solution ----------
 ------------------------------
@@ -121,5 +126,4 @@ ORDER BY STUDENT_ID
         ,SUBJECT_NAME
 
 
--- In the above solution, the cross join will create the 4*3 = 12 rows for each student(4) against each subject no matter the condition.
--- Then we can use the left join to just count the subject_names for each student and subject.
+-- Here, a cross join is needed so as to get all the subjects for each student no matter if they attended an exam or not.
