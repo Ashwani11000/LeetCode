@@ -48,3 +48,9 @@ FROM TRIANGLE
 
 -- Basic maths : In a triangle, Sum of two sides is always going to be greater than the third side.
 -- Same condition can be achieved through CASE statement as the IF statement is MySQL specific.
+-- SELECT  X,Y,Z
+--         ,CASE WHEN (X+Y>Z AND Y+Z>X AND X+Z>Y)
+--                     THEN 'Yes'
+--                     ELSE 'No' 
+--         END AS TRIANGLE
+-- FROM TRIANGLE
