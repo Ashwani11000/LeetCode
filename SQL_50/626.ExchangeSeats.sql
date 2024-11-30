@@ -54,3 +54,9 @@
 ------------------------------
 ---------- Solution ----------
 ------------------------------
+SELECT S1.ID, COALESCE(S2.STUDENT,S1.STUDENT) AS STUDENT
+FROM SEAT S1
+LEFT JOIN SEAT S2
+ON S2.ID=(CASE WHEN S1.ID%2 =0 THEN S1.ID-1 ELSE S1.ID+1 END)
+
+-- 3-4 MORE APPROACHES
