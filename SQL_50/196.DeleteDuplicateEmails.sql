@@ -56,7 +56,7 @@ FROM USERS
 WHERE MAIL REGEXP '^[A-Za-z][A-Za-z0-9_\.\-]*@leetcode(\\?com)?\\.com$'
 
 
-
+ 
 -- https://leetcode.com/problems/find-users-with-valid-e-mails/solutions/3853585/regex-explained-pandas-mysql-an-effortless-and-simple-approach-with-comments
 -- Regex Pattern: ^[A-Za-z][A-Za-z0-9_\.\-]*@leetcode(\?com)?\.com$
 

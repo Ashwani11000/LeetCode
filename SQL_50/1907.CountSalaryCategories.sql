@@ -81,3 +81,55 @@ ON CAT1.CATEGORY = CAT2.CATEGORY
 GROUP BY CAT2.CATEGORY
 
 -- This can also be solved using a union of categories with count of records where the income satisfies the given condition. 
+
+-- SELECT "Low Salary" AS CATEGORY,
+--         SUM(CASE WHEN INCOME<20000 THEN 1 ELSE 0 END) AS ACCOUNTS_COUNT
+--         FROM ACCOUNTS
+-- UNION ALL
+-- SELECT "Average Salary" AS CATEGORY,
+--         SUM(CASE WHEN INCOME BETWEEN 20000 AND 50000 THEN 1 ELSE 0 END) AS ACCOUNTS_COUNT
+--         FROM ACCOUNTS
+-- UNION ALL
+-- SELECT "High Salary" AS CATEGORY,
+--         SUM(CASE WHEN INCOME>50000 THEN 1 ELSE 0 END) AS ACCOUNTS_COUNT
+--         FROM ACCOUNTS
+        
+-- ALTERNATIVE SOLUTION WITH MAX OF CATEGORY UNION OF '0'
+-- WITH ACCOUNTS_CATEGORY AS
+-- (SELECT *, CASE WHEN INCOME<20000 THEN "Low Salary"
+--                WHEN INCOME>=20000 AND INCOME <=50000 THEN "Average Salary"
+--                WHEN INCOME >50000 THEN "High Salary" END AS CATEGORY
+-- FROM ACCOUNTS
+-- )
+-- SELECT CATEGORY, MAX(ACCOUNTS_COUNT) AS ACCOUNTS_COUNT
+-- FROM ( 
+-- SELECT CATEGORY, COUNT(1) AS ACCOUNTS_COUNT
+-- FROM ACCOUNTS_CATEGORY
+-- GROUP BY CATEGORY
+-- union
+-- select 'High Salary', 0 as accounts_count
+-- union
+-- select 'Average Salary', 0 as accounts_count
+-- union
+-- select 'Low Salary', 0 as accounts_count
+-- ) ACCOUNTS
+-- GROUP BY CATEGORY
+
+-- ALTERNATIVE SOLUTION WITH RIGHT JOIN
+-- SELECT CATEGORY AS CATEGORY, COUNT(ACCOUNT_ID) AS ACCOUNTS_COUNT
+-- FROM
+-- (SELECT *
+--     FROM ACCOUNTS
+--     RIGHT JOIN
+--     (SELECT "Low Salary" AS CATEGORY
+--     UNION ALL 
+--     SELECT "Average Salary"
+--     UNION ALL
+--     SELECT "High Salary"
+--     ) CATEGORY
+--     ON CASE WHEN (INCOME<20000) THEN "Low Salary"
+--                 WHEN INCOME >=20000 AND INCOME <= 50000 THEN "Average Salary"
+--                 WHEN INCOME > 50000 THEN "High Salary"
+--         END = CATEGORY.CATEGORY
+--     ) ACCOUNT_CATEGORY
+--  GROUP BY CATEGORY
